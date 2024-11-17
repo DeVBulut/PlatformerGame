@@ -29,5 +29,10 @@ public class LevelInteractionController : MonoBehaviour
             Debug.Log(other.gameObject.name + " has been collected!");
             Destroy(other.gameObject);
         }
+        else if(other.tag == VariableList.SawTag)
+        {
+            Debug.Log(other.gameObject.name + " has hit you!");
+            
+        }
     }
 }

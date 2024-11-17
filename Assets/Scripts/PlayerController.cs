@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     //private bool alive = true;
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float airSpeed = 4f;
-    public float doubleJumpCharge = 1; 
+    public float doubleJumpCharge = 1;
+    public Transform spawnLocation; 
     private float InputAxis;
     public bool canMove;
     public LayerMask groundLayer;
@@ -99,6 +100,19 @@ public class PlayerController : MonoBehaviour
         }    
     }
 
+    public void HandleDoubleJump()
+    {
+        if(isGrounded())
+        {
+            doubleJumpCharge = 1; 
+        }
+    }
+
+    public void Die()
+    {
+        this.transform.position = spawnLocation.position;
+    }
+
 
     public void Flip()
     {
@@ -116,7 +130,6 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
         }
-        
     }
 
     //Boolean Functions
@@ -132,13 +145,6 @@ public class PlayerController : MonoBehaviour
     public bool canDoubleJump()
     {
         return doubleJumpCharge == 1; 
-    }
-    public void HandleDoubleJump()
-    {
-        if(isGrounded())
-        {
-            doubleJumpCharge = 1; 
-        }
     }
 
     public bool isRunning()
