@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public PlayerFallState fallState;
     public PlayerHitState hitState;
     public PlayerDoubleJumpState doubleJump;
-    public bool a; 
+    public PlayerSpawnState spawnState; 
 
     #endregion
 
@@ -43,12 +43,13 @@ public class PlayerController : MonoBehaviour
         fallState.Setup( this, stateMachine, animator, rb);
         hitState.Setup(  this, stateMachine, animator, rb);
         doubleJump.Setup(this, stateMachine, animator, rb);
+        spawnState.Setup(this, stateMachine, animator, rb);
     }
 
     void Start()
     {
         canMove = true;
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(spawnState);
     }
 
     void Update()
@@ -57,7 +58,6 @@ public class PlayerController : MonoBehaviour
         Flip();
         Jump();
         HandleDoubleJump();
-        a = isRunning(); 
     }
 
     void FixedUpdate()

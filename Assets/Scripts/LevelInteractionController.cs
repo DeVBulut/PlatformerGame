@@ -21,7 +21,8 @@ public class LevelInteractionController : MonoBehaviour
     {
         if(other.tag == VariableList.CheckPointTag)
         {
-            //Execute Scene Transition
+            Debug.Log("Checkpoint Reached!");
+            other.gameObject.GetComponent<Animator>().SetTrigger("Reach"); 
         }
         else if(other.tag == VariableList.FruitTag)
         {

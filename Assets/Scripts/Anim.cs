@@ -8,5 +8,6 @@ public static class Anim
     public const string  Fall = "Fall";
     public const string Hit = "Hit";
     public const string DoubleJump = "DoubleJump";
+    public const string Spawn = "Spawn";
 
 }
