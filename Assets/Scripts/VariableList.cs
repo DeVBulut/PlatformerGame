@@ -6,9 +6,13 @@ public static class VariableList
 
     //public const float runSpeed = 10f;
     //public const float airSpeed = 8f;
-    public const float movementSmoothing = 0.06f;
-    public const float jumpPower = 250f;
+    public const float movementSmoothing = 0.04f;
+    public const float jumpPower = 400f;
+    public const float doubleJumpPower = 400f;
     public const float maxCoyote = .2f;
     public const float peakThreshold = 1.5f;
 
+    public const string CheckPointTag = "Flag";
+    public const string FruitTag = "Fruit";
+    public const string SawTag = "Saw";
 }

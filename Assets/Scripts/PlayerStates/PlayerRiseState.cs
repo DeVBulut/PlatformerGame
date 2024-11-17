@@ -15,9 +15,13 @@ public class PlayerRiseState : PlayerState
     public override void FrameUpdate()
     {
         //Debug.Log(rb.velocity.y);
-        if(rb.velocity.y < VariableList.peakThreshold && rb.velocity.y > -VariableList.peakThreshold && !playerController.isGrounded())
+        if(rb.velocity.y < 0.2 && !playerController.isGrounded())
         {
             playerStateMachine.ChangeState(playerController.fallState);
+        }
+        if(Input.GetKeyDown(KeyCode.Space) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1 && playerController.doubleJumpCharge == 1)
+        {
+            playerStateMachine.ChangeState(playerController.doubleJump);
         }
     }
 

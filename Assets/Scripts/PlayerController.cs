@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     //private bool alive = true;
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float airSpeed = 4f;
+    public float doubleJumpCharge = 1; 
     private float InputAxis;
     public bool canMove;
     public LayerMask groundLayer;
@@ -23,7 +24,9 @@ public class PlayerController : MonoBehaviour
     public PlayerRunState runState;
     public PlayerRiseState riseState;
     public PlayerFallState fallState;
-    public PlayerHitState hitState; 
+    public PlayerHitState hitState;
+    public PlayerDoubleJumpState doubleJump;
+    public bool a; 
 
     #endregion
 
@@ -34,11 +37,12 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         groundCheck = transform.GetChild(0).GetComponent<BoxCollider2D>();
 
-        idleState.Setup(this, stateMachine, animator, rb);
-        runState.Setup(this, stateMachine, animator, rb);
-        riseState.Setup(this, stateMachine, animator, rb);
-        fallState.Setup(this, stateMachine, animator, rb);
-        hitState.Setup(this, stateMachine, animator, rb);
+        idleState.Setup( this, stateMachine, animator, rb);
+        runState.Setup(  this, stateMachine, animator, rb);
+        riseState.Setup( this, stateMachine, animator, rb);
+        fallState.Setup( this, stateMachine, animator, rb);
+        hitState.Setup(  this, stateMachine, animator, rb);
+        doubleJump.Setup(this, stateMachine, animator, rb);
     }
 
     void Start()
@@ -51,6 +55,9 @@ public class PlayerController : MonoBehaviour
     {
         stateMachine.CurrentPlayerState.FrameUpdate();
         Flip();
+        Jump();
+        HandleDoubleJump();
+        a = isRunning(); 
     }
 
     void FixedUpdate()
@@ -71,23 +78,25 @@ public class PlayerController : MonoBehaviour
             float variableSpeed = isGrounded() == true ? runSpeed : airSpeed;
             float variableSmoothing = VariableList.movementSmoothing + (InputAxis != 0 ? VariableList.movementSmoothing : 0f);
 
-
+ 
             Vector2 targetVelocity = new Vector2(InputAxis * variableSpeed, rb.velocity.y);
 
             //zero variable
             Vector3 zeroVector = Vector2.zero;
-            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVector, isGrounded() ? variableSmoothing : variableSmoothing + 0.1f);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVector, isGrounded() ? variableSmoothing : variableSmoothing + 0.02f);
         }
     }
 
     public void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && canJump()){ 
-
-            //add force in positive upwards direction
-            rb.AddForce(Vector2.up * VariableList.jumpPower);
-            stateMachine.ChangeState(riseState);
-        }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if (canJump())
+            {
+                rb.AddForce(Vector2.up * VariableList.jumpPower);
+                stateMachine.ChangeState(riseState);
+            }
+        }    
     }
 
 
@@ -120,10 +129,21 @@ public class PlayerController : MonoBehaviour
     {
         return isGrounded() && canMove;
     }
+    public bool canDoubleJump()
+    {
+        return doubleJumpCharge == 1; 
+    }
+    public void HandleDoubleJump()
+    {
+        if(isGrounded())
+        {
+            doubleJumpCharge = 1; 
+        }
+    }
 
     public bool isRunning()
     {
-        if(stateMachine.CurrentPlayerState == runState && Mathf.Abs(rb.velocity.x) > 2) 
+        if(stateMachine.CurrentPlayerState == runState) 
         {
             return true;
         }

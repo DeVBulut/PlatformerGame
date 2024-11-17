@@ -23,15 +23,20 @@ public class PlayerFallState : PlayerState
         {
             playerStateMachine.ChangeState(playerController.runState);
         }
+
+        if(Input.GetKeyDown(KeyCode.Space) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1 && playerController.doubleJumpCharge == 1)
+        {
+            playerStateMachine.ChangeState(playerController.doubleJump);
+        }
     }
 
     public override void PhysicsUpdate()
     {
-
+        rb.gravityScale = 2f;
     }
 
     public override void ExitState(PlayerState newState)
     {
-
+        rb.gravityScale = 1.5f;
     }
 }
