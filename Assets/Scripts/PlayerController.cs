@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -27,17 +28,22 @@ public class PlayerController : MonoBehaviour
     public PlayerFallState fallState;
     public PlayerHitState hitState;
     public PlayerDoubleJumpState doubleJump;
-    public PlayerSpawnState spawnState; 
-    public AudioClip jumpSound;
-    private AudioSource audioSource;
+    public PlayerSpawnState spawnState;
+    public PlayerDeathState deathState;
+    public PlayerDeSpawnState deSpawnState;
+
     #endregion
 
+    
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         groundCheck = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        Collider2D collider = GetComponent<Collider2D>();
 
         idleState.Setup( this, stateMachine, animator, rb);
         runState.Setup(  this, stateMachine, animator, rb);
@@ -46,18 +52,26 @@ public class PlayerController : MonoBehaviour
         hitState.Setup(  this, stateMachine, animator, rb);
         doubleJump.Setup(this, stateMachine, animator, rb);
         spawnState.Setup(this, stateMachine, animator, rb);
+        deathState.Setup(this, stateMachine, animator, rb);
+        deSpawnState.Setup(this, stateMachine, animator, rb);
+        stateMachine.Initialize(spawnState);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        stateMachine.ChangeState(spawnState);
+    }
+
+    void OnDestroy()
+    {
+        // Unregister the event when the GameObject is destroyed
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Start()
     {
         canMove = true;
         stateMachine.Initialize(spawnState);
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-        audioSource.playOnAwake = false; // Ensure the sound doesn't play on start
     }
 
     void Update()
@@ -95,24 +109,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-  public void Jump()
+    public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             if (canJump())
             {
-                if (jumpSound != null)
-                {
-                    audioSource.clip = jumpSound;
-                    audioSource.Play();
-                }
                 rb.AddForce(Vector2.up * VariableList.jumpPower);
                 stateMachine.ChangeState(riseState);
-
-                // Play jump sound
-                
             }
-        }
+        }    
     }
 
     public void HandleDoubleJump()
@@ -125,7 +131,12 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        this.transform.position = spawnLocation.position;
+        stateMachine.ChangeState(deathState);
+    }
+
+    public void DeSpawn()
+    {
+        stateMachine.ChangeState(deSpawnState);
     }
 
 
