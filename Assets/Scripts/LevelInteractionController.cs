@@ -5,10 +5,11 @@ using UnityEngine.UIElements;
 
 public class LevelInteractionController : MonoBehaviour
 {
+    private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class LevelInteractionController : MonoBehaviour
         else if(other.tag == VariableList.SawTag)
         {
             Debug.Log(other.gameObject.name + " has hit you!");
-            
+            playerController.Die();
         }
     }
 }

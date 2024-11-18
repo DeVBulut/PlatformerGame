@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerSpawnState : PlayerState
 {
-    public PlayerSpawnState(PlayerController playerController, PlayerStateMachine playerStateMachine, Animator animator, Rigidbody2D rigidbody) : base(playerController, playerStateMachine, animator, rigidbody)
+    public PlayerSpawnState(PlayerController playerController, PlayerStateMachine playerStateMachine, Animator animator, Rigidbody2D rigidbody, Collider2D collider) : base(playerController, playerStateMachine, animator, rigidbody)
     {
     }
 
     public override void EnterState()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        playerController.gameObject.transform.position = Vector3.zero;
         animator.Play(Anim.Spawn);
         Debug.Log(this.ToString());
     }

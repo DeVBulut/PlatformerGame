@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     public PlayerFallState fallState;
     public PlayerHitState hitState;
     public PlayerDoubleJumpState doubleJump;
-    public PlayerSpawnState spawnState; 
+    public PlayerSpawnState spawnState;
+    public PlayerDeathState deathState; 
 
     #endregion
 
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         groundCheck = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        Collider2D collider = GetComponent<Collider2D>();
 
         idleState.Setup( this, stateMachine, animator, rb);
         runState.Setup(  this, stateMachine, animator, rb);
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
         hitState.Setup(  this, stateMachine, animator, rb);
         doubleJump.Setup(this, stateMachine, animator, rb);
         spawnState.Setup(this, stateMachine, animator, rb);
+        deathState.Setup(this, stateMachine, animator, rb);
     }
 
     void Start()
@@ -110,7 +113,8 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        this.transform.position = spawnLocation.position;
+        //if(stateMachine.CurrentPlayerState == deathState || spawnState){ return; }
+        stateMachine.ChangeState(deathState);
     }
 
 
