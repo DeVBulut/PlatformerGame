@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     public PlayerHitState hitState;
     public PlayerDoubleJumpState doubleJump;
     public PlayerSpawnState spawnState; 
-
+    public AudioClip jumpSound;
+    private AudioSource audioSource;
     #endregion
 
     private void Awake()
@@ -51,6 +52,12 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         stateMachine.Initialize(spawnState);
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false; // Ensure the sound doesn't play on start
     }
 
     void Update()
@@ -88,16 +95,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump()
+  public void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (canJump())
             {
+                if (jumpSound != null)
+                {
+                    audioSource.clip = jumpSound;
+                    audioSource.Play();
+                }
                 rb.AddForce(Vector2.up * VariableList.jumpPower);
                 stateMachine.ChangeState(riseState);
+
+                // Play jump sound
+                
             }
-        }    
+        }
     }
 
     public void HandleDoubleJump()
