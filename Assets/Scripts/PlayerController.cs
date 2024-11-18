@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -28,12 +29,16 @@ public class PlayerController : MonoBehaviour
     public PlayerHitState hitState;
     public PlayerDoubleJumpState doubleJump;
     public PlayerSpawnState spawnState;
-    public PlayerDeathState deathState; 
+    public PlayerDeathState deathState;
+    public PlayerDeSpawnState deSpawnState;
 
     #endregion
 
+    
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,6 +53,19 @@ public class PlayerController : MonoBehaviour
         doubleJump.Setup(this, stateMachine, animator, rb);
         spawnState.Setup(this, stateMachine, animator, rb);
         deathState.Setup(this, stateMachine, animator, rb);
+        deSpawnState.Setup(this, stateMachine, animator, rb);
+        stateMachine.Initialize(spawnState);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        stateMachine.ChangeState(spawnState);
+    }
+
+    void OnDestroy()
+    {
+        // Unregister the event when the GameObject is destroyed
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Start()
@@ -113,8 +131,12 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        //if(stateMachine.CurrentPlayerState == deathState || spawnState){ return; }
         stateMachine.ChangeState(deathState);
+    }
+
+    public void DeSpawn()
+    {
+        stateMachine.ChangeState(deSpawnState);
     }
 
 
