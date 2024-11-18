@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public PlayerSpawnState spawnState;
     public PlayerDeathState deathState;
     public PlayerDeSpawnState deSpawnState;
+    public AudioClip jumpSound;
+    private AudioSource audioSource;
 
     #endregion
 
@@ -72,6 +74,12 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         stateMachine.Initialize(spawnState);
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
     }
 
     void Update()
@@ -115,6 +123,11 @@ public class PlayerController : MonoBehaviour
         {
             if (canJump())
             {
+                if (jumpSound != null)
+                {
+                    audioSource.clip = jumpSound;
+                    audioSource.Play();
+                }
                 rb.AddForce(Vector2.up * VariableList.jumpPower);
                 stateMachine.ChangeState(riseState);
             }
