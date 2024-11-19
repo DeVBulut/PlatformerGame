@@ -8,6 +8,7 @@ public class PlayerSpawnState : PlayerState
 
     public override void EnterState()
     {
+        playerController.canMove = false; 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         playerController.gameObject.transform.position = Vector3.zero;
         animator.Play(Anim.Spawn);
@@ -31,5 +32,6 @@ public class PlayerSpawnState : PlayerState
     {
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerController.canMove = true;
     }
 }

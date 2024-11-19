@@ -311,11 +311,12 @@ MonoBehaviour:
   currentScore: {fileID: 0}
   totalScoreInLevel: {fileID: 0}
   audioSource: {fileID: 3979116504336337069}
-  fruitEatenSound: {fileID: 8300000, guid: 702c4a7363243d641902d65a30009020, type: 3}
+  fruitEatenSound: {fileID: 8300000, guid: df453f762deb5604eb5ed17e92a2f93a, type: 3}
   spawnSound: {fileID: 8300000, guid: aa27ba73e2d824041baeb37b6d6acf9c, type: 3}
   flagSound: {fileID: 8300000, guid: 27883d22120b34445a3d6921d88e4dae, type: 3}
   winSound: {fileID: 8300000, guid: 06540671be109a84c9a37d5ce53b4a99, type: 3}
   canvas: {fileID: 0}
+  totalScoreAtEnd: {fileID: 0}
 --- !u!61 &2891768945670671473
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.014788806, y: -0.116645396}
+  m_Offset: {x: 0.014788806, y: -0.12716657}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -360,7 +361,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.66219294, y: 0.74136984}
+  m_Size: {x: 0.66219294, y: 0.7624122}
   m_EdgeRadius: 0
 --- !u!95 &8240879123080714436
 Animator:
@@ -450,7 +451,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018060029, y: -0.46715337}
+  m_Offset: {x: -0.00904195, y: -0.46715337}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -460,7 +461,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7230792, y: 0.06569326}
+  m_Size: {x: 0.42247388, y: 0.06569326}
   m_EdgeRadius: 0
 --- !u!1 &3411348356237853690
 GameObject:
@@ -944,7 +945,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: a7b85eed1f96dd347adcc46322b247e0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0

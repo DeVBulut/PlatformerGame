@@ -8,6 +8,7 @@ public class PlayerDeathState : PlayerState
 
     public override void EnterState()
     {
+        playerController.canMove = false; 
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.Play(Anim.Die);
         Debug.Log(this.ToString());
@@ -28,6 +29,6 @@ public class PlayerDeathState : PlayerState
 
     public override void ExitState(PlayerState newState)
     {
-
+        playerController.canMove = true;
     }
 }

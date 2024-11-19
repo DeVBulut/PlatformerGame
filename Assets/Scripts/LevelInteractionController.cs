@@ -151,5 +151,12 @@ public class LevelInteractionController : MonoBehaviour
         canvas.transform.GetChild(0).gameObject.SetActive(true);
         totalScoreAtEnd.text = fruitCount.ToString(); 
         currentCheckpoint.transform.GetChild(0).gameObject.SetActive(false);
+        StartCoroutine(QuitGame());
+    }
+
+    private IEnumerator QuitGame()
+    {
+        yield return new WaitForSeconds(12);
+        Application.Quit();
     }
 }

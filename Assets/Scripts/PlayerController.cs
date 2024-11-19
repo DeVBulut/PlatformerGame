@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
@@ -61,6 +63,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StartCoroutine(LateSpawn());
+    }
+
+    private IEnumerator LateSpawn()
+    {
+        yield return new WaitForSeconds(0.5f);
         stateMachine.ChangeState(spawnState);
     }
 
