@@ -8,6 +8,7 @@ TagManager:
   - Fruit
   - Saw
   - InputZone
+  - Border
   layers:
   - Default
   - TransparentFX

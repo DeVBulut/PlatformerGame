@@ -74,7 +74,7 @@ public class LevelInteractionController : MonoBehaviour
             if (fruitComponent != null && !fruitComponent.isCollected)
             {
                 fruitComponent.isCollected = true;
-                other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                //other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
                 Debug.Log(other.gameObject.name + " has been collected!");
                 fruitCount += 1;
@@ -88,6 +88,12 @@ public class LevelInteractionController : MonoBehaviour
         else if (other.tag == VariableList.SawTag)
         {
             Debug.Log(other.gameObject.name + " has hit you!");
+            if (playerController.stateMachine.CurrentPlayerState != playerController.deathState) { audioSource.clip = spawnSound;  audioSource.Play(); }
+            playerController.Die();
+        }
+        else if (other.tag == VariableList.Border)
+        {
+            Debug.Log(other.gameObject.name + " - hit the border!");
             if (playerController.stateMachine.CurrentPlayerState != playerController.deathState) { audioSource.clip = spawnSound;  audioSource.Play(); }
             playerController.Die();
         }

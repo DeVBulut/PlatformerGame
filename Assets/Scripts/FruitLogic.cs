@@ -34,8 +34,9 @@ public class FruitLogic : MonoBehaviour
     }
 
     private IEnumerator InitiateEatSequence()
-    {
+    { 
         yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);
+       
     }
 }

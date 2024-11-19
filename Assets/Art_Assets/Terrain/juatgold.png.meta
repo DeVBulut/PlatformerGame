@@ -1,0 +1,211 @@
+fileFormatVersion: 2
+guid: 01718de6c2431634b89840be3e886a80
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Terrain (16x16)_46
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf6b3ac88311bf4b8922378015f50df
+      internalID: -487931527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Terrain (16x16)_0: 1881998451
+      Terrain (16x16)_1: 840598361
+      Terrain (16x16)_10: -1627110813
+      Terrain (16x16)_11: -536061351
+      Terrain (16x16)_12: -1284417162
+      Terrain (16x16)_13: -1907249202
+      Terrain (16x16)_14: -1422793369
+      Terrain (16x16)_15: -1793768921
+      Terrain (16x16)_16: -208517369
+      Terrain (16x16)_17: -1965309929
+      Terrain (16x16)_18: 374972011
+      Terrain (16x16)_19: -1828177900
+      Terrain (16x16)_2: -40863306
+      Terrain (16x16)_20: -443641598
+      Terrain (16x16)_21: -611419928
+      Terrain (16x16)_22: 356448371
+      Terrain (16x16)_23: 1205428774
+      Terrain (16x16)_24: -1526391186
+      Terrain (16x16)_25: 2065865129
+      Terrain (16x16)_26: -165598281
+      Terrain (16x16)_27: 1079737787
+      Terrain (16x16)_28: -1296886279
+      Terrain (16x16)_29: -1488251176
+      Terrain (16x16)_3: -53374076
+      Terrain (16x16)_30: -1771497253
+      Terrain (16x16)_31: 252867063
+      Terrain (16x16)_32: -161004470
+      Terrain (16x16)_33: -1029000430
+      Terrain (16x16)_34: -1203941550
+      Terrain (16x16)_35: -913542796
+      Terrain (16x16)_36: -1452406585
+      Terrain (16x16)_37: 1276187924
+      Terrain (16x16)_38: 269104441
+      Terrain (16x16)_39: -694226861
+      Terrain (16x16)_4: -1248760926
+      Terrain (16x16)_40: -1202730641
+      Terrain (16x16)_41: -2102487221
+      Terrain (16x16)_42: -1984296037
+      Terrain (16x16)_43: 1794407856
+      Terrain (16x16)_44: 647701832
+      Terrain (16x16)_45: 1895632857
+      Terrain (16x16)_46: -487931527
+      Terrain (16x16)_47: -632947689
+      Terrain (16x16)_5: 2002526545
+      Terrain (16x16)_6: 1378240286
+      Terrain (16x16)_7: 756752451
+      Terrain (16x16)_8: -892264305
+      Terrain (16x16)_9: -542707540
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

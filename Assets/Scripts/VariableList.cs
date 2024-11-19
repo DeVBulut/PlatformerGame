@@ -16,4 +16,5 @@ public static class VariableList
     public const string CheckPointInputZone = "InputZone";
     public const string FruitTag = "Fruit";
     public const string SawTag = "Saw";
+    public const string Border = "Border";
 }
