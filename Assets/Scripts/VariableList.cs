@@ -13,6 +13,7 @@ public static class VariableList
     public const float peakThreshold = 1.5f;
 
     public const string CheckPointTag = "Flag";
+    public const string CheckPointInputZone = "InputZone";
     public const string FruitTag = "Fruit";
     public const string SawTag = "Saw";
 }

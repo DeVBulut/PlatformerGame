@@ -10,8 +10,19 @@ public class LevelInteractionController : MonoBehaviour
     private PlayerController playerController;
     private int fruitCount = 0;
     private int localFruitCount = 0;
+    private bool checkPointReached;
+    private GameObject currentCheckpoint;
     public TextMeshProUGUI currentScore;
     public TextMeshProUGUI totalScoreInLevel; //Change this mckay to what you decided on the max amount of fruits per level. 
+    public AudioSource audioSource;
+    public AudioClip fruitEatenSound;
+    public AudioClip spawnSound;
+    public AudioClip flagSound; 
+    public AudioClip winSound;
+    public GameObject canvas;
+    public TextMeshProUGUI totalScoreAtEnd; 
+
+
 
     void Start()
     {
@@ -24,6 +35,8 @@ public class LevelInteractionController : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         localFruitCount = 0;
+        UpdateUI();
+        checkPointReached = false; 
     }
 
     void OnDestroy()
@@ -33,31 +46,64 @@ public class LevelInteractionController : MonoBehaviour
     }
     void Update()
     {
-        
+        if(checkPointReached == true)
+        {
+            if(Input.GetKey(KeyCode.G))
+            {
+                checkPointReached = false; 
+                audioSource.clip = flagSound; 
+                audioSource.Play();
+                StartCoroutine(InitiateDeSpawn());
+                StartCoroutine(InitiateSceneChange());
+            }
+        }   
     }
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.tag == VariableList.CheckPointTag)
+        if (other.tag == VariableList.CheckPointTag)
         {
-            other.gameObject.GetComponent<Collider2D>().enabled = false;
-            Debug.Log("Checkpoint Reached!");
-            other.gameObject.GetComponent<Animator>().SetTrigger("Reach");
-            StartCoroutine(InitiateDeSpawn());
-            StartCoroutine(InitiateSceneChange());
+            currentCheckpoint =  other.gameObject;
+            checkPointReached = true;
+            InitiateCheckPointFunctionality(currentCheckpoint);
         }
-        else if(other.tag == VariableList.FruitTag)
+        else if (other.tag == VariableList.FruitTag)
         {
-            Debug.Log(other.gameObject.name + " has been collected!");
-            fruitCount += 1; 
-            localFruitCount += 1;
-            UpdateUI();
+            FruitLogic fruitComponent = other.gameObject.GetComponent<FruitLogic>();
+
+            if (fruitComponent != null && !fruitComponent.isCollected)
+            {
+                fruitComponent.isCollected = true;
+                other.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+                Debug.Log(other.gameObject.name + " has been collected!");
+                fruitCount += 1;
+                localFruitCount += 1;
+                UpdateUI();
+
+                audioSource.clip = fruitEatenSound;
+                audioSource.Play();
+            }
         }
-        else if(other.tag == VariableList.SawTag)
+        else if (other.tag == VariableList.SawTag)
         {
             Debug.Log(other.gameObject.name + " has hit you!");
+            if (playerController.stateMachine.CurrentPlayerState != playerController.deathState) { audioSource.clip = spawnSound;  audioSource.Play(); }
             playerController.Die();
         }
+    
+   }
+
+    private void InitiateCheckPointFunctionality(GameObject other)
+    {
+        if(other.GetComponent<Collider2D>().enabled == true){ audioSource.clip = winSound;  audioSource.Play(); };
+        other.GetComponent<Collider2D>().enabled = false;
+        Debug.Log("Checkpoint Reached!");
+
+        other.GetComponent<Animator>().SetTrigger("Reach");
+
+        if (other.transform.GetChild(0) != null) { other.transform.GetChild(0).gameObject.SetActive(true); } else { Debug.LogWarning("UI Text Missing!"); }
+
     }
 
     private IEnumerator InitiateSceneChange()
@@ -69,6 +115,7 @@ public class LevelInteractionController : MonoBehaviour
     private IEnumerator InitiateDeSpawn()
     {
         yield return new WaitForSeconds(1f);
+        audioSource.clip = spawnSound; 
         playerController.DeSpawn();
     }
 
@@ -78,6 +125,7 @@ public class LevelInteractionController : MonoBehaviour
     }
     public void LoadNextLevel()
     {
+        if(SceneManager.GetActiveScene().name == "FinalScene"){ InitiateFinalSquence(); return;  }
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
         int nextSceneIndex = currentSceneIndex + 1;
@@ -90,5 +138,12 @@ public class LevelInteractionController : MonoBehaviour
         {
             Debug.LogWarning("No more levels to load! This is the last level.");
         }
+    }
+
+    public void InitiateFinalSquence()
+    {
+        canvas.transform.GetChild(0).gameObject.SetActive(true);
+        totalScoreAtEnd.text = fruitCount.ToString(); 
+        currentCheckpoint.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

@@ -13,6 +13,7 @@ public class PlayerDoubleJumpState : PlayerState
         Vector3 vector3 = new Vector3(rb.velocity.x, 0, 0);
         rb.velocity = vector3;
         animator.Play(Anim.DoubleJump);
+        playerController.PlayJumpSound();
         playerController.doubleJumpCharge -= 1;
         rb.AddForce(Vector2.up * VariableList.doubleJumpPower);
         Debug.Log(this.ToString());

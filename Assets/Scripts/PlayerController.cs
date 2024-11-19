@@ -123,11 +123,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canJump())
             {
-                if (jumpSound != null)
-                {
-                    audioSource.clip = jumpSound;
-                    audioSource.Play();
-                }
+                PlayJumpSound();
                 rb.AddForce(Vector2.up * VariableList.jumpPower);
                 stateMachine.ChangeState(riseState);
             }
@@ -169,6 +165,15 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
         }
+    }
+
+    public void PlayJumpSound()
+    {
+        if (jumpSound != null)
+            {
+                audioSource.clip = jumpSound;
+                audioSource.Play();
+            }
     }
 
     //Boolean Functions
