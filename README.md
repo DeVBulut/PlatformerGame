@@ -19,13 +19,14 @@ The game emphasizes tight platforming with mechanics that make movement forgivin
 
 ## 🖼️ Screenshots
 
-![Gameplay 1](![Screenshot 2025-05-06 232921](https://github.com/user-attachments/assets/f7ec2200-7a5a-43e2-a869-145714004edd))  
+(![Screenshot 2025-05-06 232921](https://github.com/user-attachments/assets/f7ec2200-7a5a-43e2-a869-145714004edd))  
 
-![Gameplay 2](![Screenshot 2025-05-06 233054](https://github.com/user-attachments/assets/7888c6b4-3f95-4883-9976-cd6468f316be))  
-*Double jump showcasing vertical movement control.*
 
-![Gameplay 3](![Screenshot 2025-05-06 232952](https://github.com/user-attachments/assets/1ce94990-8ed4-4e00-b9d6-1daa38031591))  
-*Recovering at a short-term save point.*
+(![Screenshot 2025-05-06 233054](https://github.com/user-attachments/assets/7888c6b4-3f95-4883-9976-cd6468f316be))  
+
+
+(![Screenshot 2025-05-06 232952](https://github.com/user-attachments/assets/1ce94990-8ed4-4e00-b9d6-1daa38031591))  
+
 
 ---
 
